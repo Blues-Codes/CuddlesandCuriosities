@@ -5,4 +5,4 @@ const commentSchema = new Schema({
     comment: { type: String, maxlength: 200 }
   });
 
-module.exports = model('Comment', commentSchema);
+module.exports = model('Comment', commentSchema); 

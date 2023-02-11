@@ -18,5 +18,5 @@ const memberSchema = new Schema(
   }
 );
 
-module.exports = model('members', memberSchema);
+module.exports = model('members', memberSchema); 
 

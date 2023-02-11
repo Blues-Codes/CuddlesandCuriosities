@@ -13,7 +13,7 @@ router.get('/signup', isLoggedOut,(req, res, next) =>{
   res.render('auth/signup.hbs');
 });
 
-router.post('/signup', isLoggedOut,(req,res, next ) => { 
+router.post('/signup', isLoggedOut,(req,res, next ) => {  
   console.log('The form data: ', req.body);
 
   const { username, password } = req.body;

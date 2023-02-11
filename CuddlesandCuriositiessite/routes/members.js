@@ -16,7 +16,7 @@ router.post('/signup', isLoggedOut,(req,res, next ) => {
   if (!username || !password) {
     res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
     return;
-  }
+  } 
  
   bcryptjs
     .genSalt(saltRounds)
