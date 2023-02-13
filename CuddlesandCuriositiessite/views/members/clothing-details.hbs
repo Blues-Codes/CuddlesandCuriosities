@@ -1,0 +1,25 @@
+{{> eachClothing}}
+
+
+<button>Edit</button>
+
+<button>Delete</button>
+
+
+{{#if comments}}
+
+    <ul>
+
+    {{#each comments}}
+
+        <li>Review</li>
+
+    {{/each}}
+
+    </ul>
+
+{{else}}
+
+    <p>No Reviews yet</p>
+
+{{/if}}

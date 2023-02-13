@@ -5,7 +5,7 @@ var router = express.Router();
 const { isLoggedIn } = require('../middleware/route-guard');
 const Amigurumi = require('../models/Amigurumi.model');
 
-router.get('/all-rooms', (req, res, next) => {
+router.get('/amigurumi', (req, res, next) => {
   
     Amigurumi.find()
     .populate('creator')

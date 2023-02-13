@@ -11,9 +11,9 @@ const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js'); // 
 router.post('/signup', isLoggedOut,(req,res, next ) => { 
   console.log('The form data: ', req.body);
 
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
   
-  if (!username || !password) {
+  if (!username || !password || !email) {
     res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
     return;
   } 
@@ -24,7 +24,7 @@ router.post('/signup', isLoggedOut,(req,res, next ) => {
       return bcryptjs.hash(password, salt)
     })
     .then((hashedPassword) => {
-      return User.create({
+      return members.create({
       
             username: req.body.username,
             password: hashedPassword
@@ -48,7 +48,7 @@ router.post('/signup', isLoggedOut,(req,res, next ) => {
           });
     });
 // Login 
-router.get('/login', (req,res,next) => {
+router.get('/login', (req, res, next) => {
   res.render('auth/login.hbs')
 });
 
@@ -63,13 +63,13 @@ router.post('/login', (req, res, next) => {
     return;
   }
  
-  User.findOne({ username })
+  members.findOne({ username })
     .then(user => {
       if (!user) {
         res.render('auth/login', { errorMessage: 'Username is not registered. Try with other email.' });
         return;
       } else if (bcryptjs.compareSync(password, user.password)) {
-        req.session.user = user
+        req.session.user = members
         res.redirect('/members/member-profile');
       } else {
         res.render('auth/login', { errorMessage: 'Incorrect password.' });
@@ -80,7 +80,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/profile', isLoggedIn, (req, res, next) => {
 const user = req.session.user
-res.render('members/member-profile.hbs', {user})
+res.render('members/member-profile.hbs', {Members})
 });
 
 router.get('/logout', isLoggedIn,(req, res, next) => {
