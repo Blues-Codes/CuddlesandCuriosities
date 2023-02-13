@@ -14,12 +14,14 @@ const hbs = require('hbs')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var membersRouter = require('./routes/members');
+var amigurumiRouter = require('./routes/amigurumi');
  
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + "/views/partials");
 
 //install sessions
 app.set('trust proxy', 1);
@@ -52,8 +54,9 @@ app.use(
 );
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/members', membersRouter)
+// app.use('/users', usersRouter);
+app.use('/members', membersRouter);
+app.use('/amigurumi', amigurumiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

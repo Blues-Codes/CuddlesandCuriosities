@@ -32,7 +32,7 @@ router.post('/signup', isLoggedOut,(req,res, next ) => {
         })
         .then(userFromDB => {
           console.log('Newly created user is: ', userFromDB);
-          res.redirect('/users/login')
+          res.redirect('/auth/login')
         })
     
         .catch((error) => {
@@ -80,7 +80,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/profile', isLoggedIn, (req, res, next) => {
 const user = req.session.user
-res.render('users/user-profile.hbs', {user})
+res.render('members/member-profile.hbs', {user})
 });
 
 router.get('/logout', isLoggedIn,(req, res, next) => {
