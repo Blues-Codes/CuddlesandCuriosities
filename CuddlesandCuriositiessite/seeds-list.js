@@ -1,7 +1,6 @@
-<h4>Database list </h4>
+let Amiarr = [
 
-Amigurumi ({
-
+    Amigurumi ({
 title: "Toothless",
 level: "Intermediate",
 itemsNeeded: [
@@ -11,10 +10,10 @@ itemsNeeded: [
     "stitch markers",
     "polyfil stuffing",
     "black yarn",
-]
+],
 hookNeeded: "4.25 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: <img src =".//CuddlesandCuriositiessite/images/Amigurumi/Toothless-img.png" alt ="toothless dragon"/>
+image: "./images/Amigurumi/Toothless-img.png" ,
 Stitches: [
     "Ch - Chain",
     "SC - single crochet",
@@ -27,8 +26,8 @@ Stitches: [
     "FO - Fasten off",
 ],
 creator: "Nichole's Nerdy Knots",
-creatorLink: <a href= "www.facebook.com/nicholesnerdyknots"> nicholesnerdyknots</a>;
-}
+creatorLink: <a href= "www.facebook.com/nicholesnerdyknots"> nicholesnerdyknots</a>
+},
 {
 title: "Squirt",
 level: "Intermediate",
@@ -41,10 +40,10 @@ itemsNeeded: [
     "white yarn",
     "black yarn",
     "Polyfil stuffing",
-]
+],
 hookNeeded: "4.25 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: <img src ="../CuddlesandCuriositiessite/images/Amigurumi/Squirt.png" alt ="Squirt sea turtle"/>
+image: "./images/Amigurumi/Squirt.png",
 Stitches: [
     "Ch - Chain",
     "SC - single crochet",
@@ -57,8 +56,8 @@ Stitches: [
     "FO - Fasten off",
 ],
 creator: "Cuddles and Curiosities",
-creatorLink: <a href= ""> </a>;
-}
+creatorLink: <a href= ""> </a>
+},
 {
 title: "Baby Sully",
 level: "Hopeful Beginner",
@@ -70,10 +69,10 @@ itemsNeeded: [
     "2 8mm saftey eyes",
     "Polyfil stuffing",
     "yarn needle",
-]
+],
 hookNeeded: "3.75 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: <img src ="../images/Amigurumi/Baby-Sully.png" alt ="Baby Sully from Monsters INC"/>
+image: "../images/Amigurumi/Baby-Sully.png",
 Stitches: [
     "MR - Magic ring", 
     "Ch - Chain",
@@ -87,8 +86,8 @@ Stitches: [
     
 ],
 creator: "A Morning Cup of Jo Creations",
-creatorLink: <a href= "https://www.facebook.com/amorningcupofjocreations">A Morning Cup of Jo Creations </a>;
-}
+creatorLink: <a href= "https://www.facebook.com/amorningcupofjocreations">A Morning Cup of Jo Creations </a>
+},
 {
 title: "Baby Mike",
 level: "Hopeful Beginner",
@@ -101,10 +100,10 @@ itemsNeeded: [
     "Fabric glue",
     "Yarn Needle",
     
-]
+],
 hookNeeded: "3.75 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: <img src ="../images/Amigurumi/Baby-Mike.png" alt ="baby Mike from Monsters Inc"/>
+image: "/images/Amigurumi/Baby-Mike.png",
 Stitches: [
     "Ch - Chain",
     "SC - single crochet",
@@ -114,7 +113,7 @@ Stitches: [
     
 ],
 creator: "A Morning Cup of Jo Creations",
-creatorLink: <a href= "https://www.facebook.com/amorningcupofjocreations">A Morning Cup of Jo Creations </a>;
+creatorLink: <a href= "https://www.facebook.com/amorningcupofjocreations">A Morning Cup of Jo Creations </a>
 
 },
 {
@@ -130,10 +129,10 @@ itemsNeeded: [
     "Yarn Needle",
     "5mm/10mm jump-rings for earrings (optional)",
     
-]
+],
 hookNeeded: "3 mm and 3.5mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: <img src ="CuddlesandCuriositiessite/images/Amigurumi/Baphoment-Kawaii.png" alt ="Pink and red Baphomet doll "/>
+image: "images/Amigurumi/Baphoment-Kawaii.png",
 Stitches: [
     "CH - Chain",
     "SC - single crochet",
@@ -148,8 +147,8 @@ Stitches: [
     
 ],
 creator: "GATO FU",
-creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>;
-}
+creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>
+},
 {
     title: "Stitch",
     level: "Intermediate",
@@ -158,10 +157,10 @@ creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>;
         "Light Blue Yarn",
         "PolyFil Stuffing",
         "Pink, black and white roving wool",
-        ]
+        ],
     hookNeeded: "4 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: <img src ="CuddlesandCuriositiessite/images/Amigurumi/Stitch.png" alt ="stitch doll "/>
+    image: "images/Amigurumi/Stitch.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
@@ -176,7 +175,7 @@ creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>;
         
     ],
     creator: "Rolly Crochet",
-    creatorLink: <a href= "blog.pianetadonna.it/rollycrochet/">Rolly Crochet</a>;
+    creatorLink: <a href= "blog.pianetadonna.it/rollycrochet/">Rolly Crochet</a>
 },
 {
     title: "3D Skull ",
@@ -189,10 +188,10 @@ creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>;
         "Firm polyfil stuffing",
         "tapestry needle",
         "scissors"
-        ]
+        ],
     hookNeeded: "3 mm - US terms",
     yarnType: "3 - Light worsted/DK",
-    image: <img src ="CuddlesandCuriositiessite/images/Amigurumi/AMI-Skull.png" alt ="skull"/>
+    image: ".images/Amigurumi/AMI-Skull.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
@@ -207,8 +206,8 @@ creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>;
         
     ],
     creator: "Million Bells",
-    creatorLink: <a href= "http://www.etsy.com/shop/millionbells">Million Bells</a>;
-}
+    creatorLink: <a href= "http://www.etsy.com/shop/millionbells">Million Bells</a>
+},
 {
     title: "Willendorf Venus ",
     level: "Advanced",
@@ -218,10 +217,10 @@ creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>;
         "Firm polyfil stuffing",
         "tapestry needle",
         "scissors"
-        ]
+        ],
     hookNeeded: "2.25mm - US terms",
     yarnType: "1 - super fine/fingering",
-    image: <img src ="CuddlesandCuriositiessite/images/Amigurumi/venus-willendorf.png" alt ="Venus Willendorf"/>
+    image: ".images/Amigurumi/venus-willendorf.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
@@ -233,8 +232,13 @@ creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>;
         
     ],
     creator: "Trishagurumi",
-    creatorLink: <a href= "">Trishagurumi</a>;
+    creatorLink: <a href= "">Trishagurumi</a>
+
 })
+];
+
+let clothingArr = [
+
 
 Clothing ({
 
@@ -246,18 +250,18 @@ Clothing ({
         "tapestry needle",
         "1 medium or large button",
         "25 mm knitting needle or pin"
-         ]
+         ],
     hookNeeded: "3.5 mm, 4 mm - US terms",
     yarnType: "3 - Light Worsted/DK ",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/Broomstick-cowl.png" alt ="Broomstick cowl"/>
+    image: ".images/Clothing/Broomstick-cowl.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
                 
     ],
     creator: "Mon Petit Violon Designs",
-    creatorLink: <a href= "http://www.monpetitviolon.com/">Mon Petit Violon Designs</a>;
-}
+    creatorLink: <a href= "http://www.monpetitviolon.com/">Mon Petit Violon Designs</a>
+},
 {
     title: "Starry Night Sweater ",
     level: "Advanced",
@@ -271,10 +275,10 @@ Clothing ({
         "20 yards of black yarn",
         "Stitch markers",
         "tapestry needle"
-        ]
+        ],
     hookNeeded: "5.5 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/Starry-Night-sweater.png" alt ="starry night sweater"/>
+    image: "./images/Clothing/Starry-Night-sweater.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
@@ -290,8 +294,8 @@ Clothing ({
         
     ],
     creator: "Kayla Genato",
-    creatorLink: <a href= "http://www.instagram.com/craftsbygelato">Kayla Genato</a>;
-}
+    creatorLink: <a href= "http://www.instagram.com/craftsbygelato">Kayla Genato</a>
+},
 {
     title: "Checkered Cowl ",
     level: "Beginner",
@@ -299,10 +303,10 @@ Clothing ({
         "3 skeins of yarn",
         "Stitch markers",
         "yarn needle"
-        ]
+        ],
     hookNeeded: "6.5 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/Checkered-cowl.png" alt ="checkered cowl"/>
+    image: "./images/Clothing/Checkered-cowl.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
@@ -313,8 +317,8 @@ Clothing ({
         
     ],
     creator: "Yarnspirations - Designed by Heather Lodinsky",
-    creatorLink: <a href= "http://www.yarnspirations.com">Yarnspirations</a>;
-}
+    creatorLink: <a href= "http://www.yarnspirations.com">Yarnspirations</a>
+},
 {
     title: "Single Strap Sweater Dress ",
     level: "Intermediate",
@@ -323,10 +327,10 @@ Clothing ({
         "Stitch markers",
         "yarn needle",
         "tape measure",
-        ]
+        ],
     hookNeeded: "5 mm, 7 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/single-strap-sweater-dress.png" alt ="Single strap sweater dress"/>
+    image: "./images/Clothing/single-strap-sweater-dress.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
@@ -337,8 +341,8 @@ Clothing ({
         
     ],
     creator: "TCDDIY",
-    creatorLink: <a href= "https://youtu.be/ScUJ3Aay_L8">TCDDIY</a>;
-}
+    creatorLink: <a href= "https://youtu.be/ScUJ3Aay_L8">TCDDIY</a>
+},
 {
     title: "Curvy Pull Over ",
     level: "hopeful beginner",
@@ -347,10 +351,10 @@ Clothing ({
         "Stitch markers",
         "yarn needle",
         "tape measure",
-        ]
+        ],
     hookNeeded: "9 mm - US terms",
     yarnType: "6 - Super Bulky",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/Curvy-pull-over.png" alt ="Curvy pullover"/>
+    image: "./images/Clothing/Curvy-pull-over.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
@@ -362,8 +366,8 @@ Clothing ({
         
     ],
     creator: "Yarnspirations",
-    creatorLink: <a href= "https://www.yarnspirations.com">Yarnspirations</a>;
-}
+    creatorLink: <a href= "https://www.yarnspirations.com">Yarnspirations</a>
+},
 {
     title: "Hazy Unicorn Shawl ",
     level: "hopeful beginner",
@@ -372,18 +376,18 @@ Clothing ({
         "Stitch markers",
         "yarn needle",
         "tape measure",
-        ]
+        ],
     hookNeeded: "7 mm - US terms",
     yarnType: "6 - Super Bulky",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/Curvy-pull-over.png" alt ="Curvy pullover"/>
+    image: "./images/Clothing/Curvy-pull-over.png",
     Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",        
     ],
     creator: "Hobbi",
-    creatorLink: <a href= "http://shop.hobbii.com/hazy-unicorn-shawl">Hobbi</a>;
-}
+    creatorLink: <a href= "http://shop.hobbii.com/hazy-unicorn-shawl">Hobbi</a>
+},
 {
     title: "Madison Shoulder Wrap ",
     level: "intermediate",
@@ -393,10 +397,10 @@ Clothing ({
         "Stitch markers",
         "yarn needle",
         "tape measure",
-        ]
+        ],
     hookNeeded: "3mm, 4mm, 5mm - US terms",
     yarnType: "3 - Light Worsted/DK for yarn A, 4 - Worsted/Aran",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/Madison-shoulder-wrap.png" alt ="Madison shoulder wrap"/>
+    image: "./images/Clothing/Madison-shoulder-wrap.png",
     Stitches: [
         "CH - Chain",
         "CH SP - chain space",
@@ -412,8 +416,8 @@ Clothing ({
                 
     ],
     creator: "Christel Riley Watts",
-    creatorLink: <a href= "">Christel Riley Watts</a>;
-}
+    creatorLink: <a href= "">Christel Riley Watts</a>
+},
 {
     title: "Skull Cocoon Sweater ",
     level: "intermediate",
@@ -422,10 +426,10 @@ Clothing ({
         "Stitch markers",
         "yarn needle",
         "tape measure",
-        ]
+        ],
     hookNeeded: "6mm - US terms",
     yarnType: "5 - Chunky",
-    image: <img src ="CuddlesandCuriositiessite/images/Clothing/skull-cocoon-sweater.png" alt ="skull cocoon sweater"/>
+    image: "./images/Clothing/skull-cocoon-sweater.png",
     Stitches: [
         "CH - Chain",
         "SL ST - slip stitch",
@@ -438,5 +442,6 @@ Clothing ({
                 
     ],
     creator: "Caryns Creations",
-    creatorLink: <a href= "">Caryns Creations</a>;
+    creatorLink: <a href= "">Caryns Creations</a>
 })
+]

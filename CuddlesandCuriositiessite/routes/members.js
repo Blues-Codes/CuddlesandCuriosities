@@ -8,6 +8,10 @@ const members = require('../models/Members.model')
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js'); // calling in middleware
 
 
+router.get('/signup', (req, res, next) => {
+    res.render('auth/signup.hbs')
+})
+
 router.post('/signup', isLoggedOut,(req,res, next ) => { 
   console.log('The form data: ', req.body);
 
@@ -32,7 +36,8 @@ router.post('/signup', isLoggedOut,(req,res, next ) => {
         })
         .then(userFromDB => {
           console.log('Newly created user is: ', userFromDB);
-          res.redirect('/auth/login')
+          req.session.user = userFromDB;
+          res.redirect('/members/member-profile')
         })
     
         .catch((error) => {
@@ -69,7 +74,7 @@ router.post('/login', (req, res, next) => {
         res.render('auth/login', { errorMessage: 'Username is not registered. Try with other email.' });
         return;
       } else if (bcryptjs.compareSync(password, user.password)) {
-        req.session.user = members
+        req.session.user = user
         res.redirect('/members/member-profile');
       } else {
         res.render('auth/login', { errorMessage: 'Incorrect password.' });
@@ -78,9 +83,10 @@ router.post('/login', (req, res, next) => {
     .catch(error => next(error));
 });
 
-router.get('/profile', isLoggedIn, (req, res, next) => {
+router.get('/member-profile', isLoggedIn, (req, res, next) => {
 const user = req.session.user
-res.render('members/member-profile.hbs', {Members})
+console.log("this is the user", user)
+res.render('members/member-profile.hbs', user)
 });
 
 router.get('/logout', isLoggedIn,(req, res, next) => {
