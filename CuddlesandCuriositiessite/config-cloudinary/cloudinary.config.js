@@ -12,15 +12,15 @@ cloudinary.config({
 
 
   const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
+        cloudinary,
     params: {
-      folder: "pictures",
-      format: async (req, file) => "png",
-      use_filename: true,
-    },
+        folder: 'Member photos' // The name of the folder in cloudinary
+      // resource_type: 'raw' => this is in case you want to upload other type of files, not just images
+    }
   });
-
-  const uploadImg = multer({ storage: storage });
+  
+ 
+  module.exports = multer({ storage });
 
 //   const upload = multer({
 //     storage: multerS3({
@@ -39,4 +39,4 @@ cloudinary.config({
 //     res.send('Successfully uploaded ' + req.files.length + ' files!')
 //   })
 
-  module.exports = uploadImg;
+//   module.exports = uploadImg;
