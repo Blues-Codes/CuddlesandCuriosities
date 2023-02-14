@@ -6,7 +6,8 @@ const saltRounds = 10;
 
 const members = require('../models/Members.model')
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js'); // calling in middleware
-
+const upload = require('./');
+const uploadImg = require('../config-cloudinary/cloudinary.config');
 
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
@@ -88,6 +89,28 @@ const user = req.session.user
 console.log("this is the user", user)
 res.render('members/member-profile.hbs', user)
 });
+
+router.post('/member-profile', isLoggedIn, uploadImg.single("photo"), async(req, res, next) => {
+    console.log({...req.body}, "praying")
+   const { name, description, media } = req.body
+    console.log(req.file.path)
+//    upload.create({
+//     // name,
+//     // description,
+//     // media,
+//     // owner: req.session.user._id
+})
+// .then((createduploadImg) => {
+//     console.log(createduploadImg)
+//     res.redirect('/members/member-profile')
+// })
+// .catch((err) => {
+//     console.log(err)
+// })
+
+
+    
+// })
 
 router.get('/logout', isLoggedIn,(req, res, next) => {
 req.session.destroy(err => {
