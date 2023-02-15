@@ -11,7 +11,7 @@ const memberSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
-    imageUrl: String
+     patterns: [{ type: Schema.Types.ObjectId, ref: 'CreatePost'}],
   },
   {
     timestamps: true

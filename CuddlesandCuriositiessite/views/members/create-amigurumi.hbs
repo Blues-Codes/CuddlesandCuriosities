@@ -1,12 +1,25 @@
-<h2>Add New Room</h2>
+<h2>Add New Patterm</h2>
 
-<form action="/amigurumi/create-amigurumi" method="post">
+<form action="/allpatterns/create-amigurumi" method="post" enctype="multipart/form-data">
 
 <label for="">Title</label>
 <input type="text" name="Title">
 
+<label for="">Type</label>
+    <select name="type" id ="type">
+        <option value =''>Select one</option>
+        <option value="Amigurumi">Amigurumi</option>
+        <option value="Clothing">Clothing</option>
+    </select>
+
 <label for="">level</label>
-<input type="text" name="level">
+   <select name="level" id="level">
+        <option value="">Select level</option>
+        <option value="Absolute Beginner">Absolute Beginner</option>
+        <option value="Hopeful Beginner">Hopeful Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+    </select>
 
 <label for="">Items needed</label>
 <input type="text" name="itemsneeded">
@@ -15,7 +28,17 @@
 <input type="text" name="hookneeded">
 
 <label for="">Yarn Type</label>
-<input type="text" name="yarntype">
+<select name="yarn" id="yarn">
+        <option value="">Select Subject</option>
+        <option value="0 -Lace">0 -Lace</option>
+        <option value="1 -Fingering/sock">1 -Fingering/sock</option>
+        <option value="2 -Sport/Baby">2 -Sport/Baby</option>
+        <option value="3 - DK/Light Worsted">3 - DK/Light Worsted</option>
+        <option value="4 - Worsted/Aran">4 - Worsted/Aran</option>
+        <option value="5 - Bulky">5 - Bulky</option>  
+        <option value="6 - Super Bulky">6 - Super Bulky</option>
+        <option value="7 - Jumbo">7 - Jumbo</option>
+    </select>
 
 <label for="">Image</label>
 <input type="text" name="imageUrl">
@@ -32,3 +55,5 @@
 <button type="submit">Add amigurumi</button>
 
 </form>
+
+

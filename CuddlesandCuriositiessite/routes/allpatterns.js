@@ -1,9 +1,170 @@
-const mongoose = require('mongoose');
-const Pattern = require('./models/Pattern.model');
+var express = require('express');
+var router = express.Router();
+const mongoose = require('mongoose'); 
+const bcryptjs = require('bcryptjs');
+const saltRounds = 10;
 
-const  allPatterns = [
 
-    {
+const { isLoggedIn, isLoggedOut, isCreator, isNotCreator} = require('../middleware/route-guard')
+
+const fileUploader = require('../config-cloudinary/cloudinary.config');
+const NewAmigurumi = require('../models/Pattern.model');
+const NewClothing = require ('../models/Clothing.model');
+const Members = require('../models/Members.model');
+const CreatePost = require('../models/CreatePost.model');
+const { isLoggedIn, isLoggedOut, isOwner, isNotOwner} = require('../middleware/route-guard') // calling in middleware
+const upload = require('./');
+
+//ADDING TO DATABASE
+router.get('/add-amigurumi', isLoggedIn, showAddForm);
+router.get('/add-clothing', isLoggedIn, showAddForm);
+router.post('/add-amigurumi', isLoggedIn, addResource);
+router.post('/add-clothing', isLoggedIn, addResource);
+router.get('/all-patterns', showAllResources);
+
+//EDITING AND DELETING IN DATABASE AND PROFILE
+router.get('/amigurumi-details/:id', showAmigurumiDetails);
+router.get('/clothing-details/:id', showClothingDetails);
+router.get('/edit-resource/:id', isOwner, displayEditForm);
+router.post('/edit-resource/:id', isOwner, editForm);
+router.get('/delete-image/:id', isOwner, deleteimage);
+
+//FILTERING SEARCH
+router.get('/find-amigurumi', showFindAmigurumi);
+router.get('/find-clothing', showFindClothing);
+router.post('/find-amigurumi', displayFoundAmigurumi);
+router.post('/find-clothing', displayFoundClothing);
+
+// ADDING PAGES
+function showAddForm (req, res, next) {
+    res.render('members/create-amigurumi.hbs')
+}
+function addResource(req, res, next) {
+    const { name, description, grade, subject,imageUrl } = req.body
+    Resource.create({
+        name,
+        description,
+        grade,
+        subject,
+        imageUrl, //figure out how to add any other kind of file, and how to handle it
+        creator: req.session.user._id
+    })
+    .then((newResource) => {
+        console.log(newResource)
+        res.redirect('/resources/all-resources')
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
+//FOR ALL PATTERNS
+function showAllResources(req, res, next){
+    Resource.find()
+    .populate('creator')
+    .then((foundResources) => {
+        res.render('resources/allResources.hbs', { foundResources });
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+// FOR PATTERN DETAILS
+function showResourceDetails(req, res, next){
+    Resource.findById(req.params.id)
+    .populate('creator')
+    .then((foundResource) => {
+        res.render('resources/resourceDetails.hbs', foundResource)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
+// FOR EDITING PROFILE
+function displayEditForm(req, res, next){
+    Resource.findById(req.params.id)
+    .then((foundResource) => {
+        res.render('resources/editResource.hbs', foundResource)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+function editForm(req, res, next){
+    const { name, description, grade, subject, imageUrl} = req.body
+    Resource.findByIdAndUpdate(req.params.id, 
+        {
+            name,
+            description,
+            grade,
+            subject,
+            imageUrl
+        },
+        {new: true})
+    .then((updatedResource) => {
+        console.log(updatedResource)
+        res.redirect(`/resources/resource-details/${req.params.id}`)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+// FOR DELETING PAGES FROM THE PROFILE
+
+function deleteImage(req, res, next){
+    image.findByIdAndDelete(req.params.id)
+    .then((confirmation) => {
+        console.log(confirmation)
+        res.redirect('/members/member-profile')
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+//FILTERING FIND
+function showFindResource(req, res, next) {
+    res.render('resources/findResource.hbs')
+  }
+  
+  function displayFoundResource(req, res, next){
+    const { name, description, grade, subject, imageUrl} = req.body
+    if (grade && subject){
+        Resource.find({ 
+            "$and": [
+            {grade},
+            {subject}
+        ]}  
+    )
+    .then((foundResource) => {
+        console.log('**** for $and...here is the resource I got***', foundResource)
+        res.render('resources/foundResource.hbs', {foundResource})
+    })
+    .catch((err) =>{
+        console.log("On line 152", err)
+    })
+    } else {
+        Resource.find({ 
+            "$or": [
+            {grade},
+            {subject}
+        ]}
+    )
+    .then((foundResource) => {
+        console.log('**** for $or...here is the resource I got***', foundResource)
+        res.render('resources/foundResource.hbs', {foundResource})
+    })
+    .catch((err) =>{
+        console.log("On line 152", err)
+    })
+    } 
+}
+
+
+
+let Amiarr = [
+
+    Amigurumi ({
 title: "Toothless",
 level: "Intermediate",
 type: "Amigurumi",
@@ -17,8 +178,8 @@ itemsNeeded: [
 ],
 hookNeeded: "4.25 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323185/Pattern%20photos/Toothless-img_ssswf5.png" ,
-stitches: [
+image: "./images/Amigurumi/Toothless-img.png" ,
+Stitches: [
     "Ch - Chain",
     "SC - single crochet",
     "INC - single crochet increase",
@@ -30,7 +191,7 @@ stitches: [
     "FO - Fasten off",
 ],
 creator: "Nichole's Nerdy Knots",
-creatorLink:   "www.facebook.com/nicholesnerdyknots" 
+creatorLink: <a href= "www.facebook.com/nicholesnerdyknots"> nicholesnerdyknots</a>
 },
 {
 title: "Squirt",
@@ -48,8 +209,8 @@ itemsNeeded: [
 ],
 hookNeeded: "4.25 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323215/Pattern%20photos/Squirt_npzhyh.png",
-stitches: [
+image: "./images/Amigurumi/Squirt.png",
+Stitches: [
     "Ch - Chain",
     "SC - single crochet",
     "DC - double crochet increase",
@@ -61,7 +222,7 @@ stitches: [
     "FO - Fasten off",
 ],
 creator: "Cuddles and Curiosities",
-creatorLink: ''
+creatorLink: <a href= ""> </a>
 },
 {
 title: "Baby Sully",
@@ -78,8 +239,8 @@ itemsNeeded: [
 ],
 hookNeeded: "3.75 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323185/Pattern%20photos/Baby-Sully_j7r3wl.png",
-stitches: [
+image: "../images/Amigurumi/Baby-Sully.png",
+Stitches: [
     "MR - Magic ring", 
     "Ch - Chain",
     "SC - single crochet",
@@ -92,7 +253,7 @@ stitches: [
     
 ],
 creator: "A Morning Cup of Jo Creations",
-creatorLink: "https://www.facebook.com/amorningcupofjocreations"
+creatorLink: <a href= "https://www.facebook.com/amorningcupofjocreations">A Morning Cup of Jo Creations </a>
 },
 {
 title: "Baby Mike",
@@ -110,8 +271,8 @@ itemsNeeded: [
 ],
 hookNeeded: "3.75 mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323185/Pattern%20photos/Baby-Mike_as9myy.png",
-stitches: [
+image: "/images/Amigurumi/Baby-Mike.png",
+Stitches: [
     "Ch - Chain",
     "SC - single crochet",
     "DEC - single crochet decrease",
@@ -120,7 +281,7 @@ stitches: [
     
 ],
 creator: "A Morning Cup of Jo Creations",
-creatorLink:  "https://www.facebook.com/amorningcupofjocreations"
+creatorLink: <a href= "https://www.facebook.com/amorningcupofjocreations">A Morning Cup of Jo Creations </a>
 
 },
 {
@@ -140,8 +301,8 @@ itemsNeeded: [
 ],
 hookNeeded: "3 mm and 3.5mm - US terms",
 yarnType: "4 - Worsted/Aran",
-image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323185/Pattern%20photos/Baphoment-Kawaii_dqtg1o.png",
-stitches: [
+image: "images/Amigurumi/Baphoment-Kawaii.png",
+Stitches: [
     "CH - Chain",
     "SC - single crochet",
     "DEC - single crochet decrease",
@@ -155,7 +316,7 @@ stitches: [
     
 ],
 creator: "GATO FU",
-creatorLink: "http://www.etsy.com/shop/gatofu"
+creatorLink: <a href= "http://www.etsy.com/shop/gatofu">GATO FU</a>
 },
 {
     title: "Stitch",
@@ -169,8 +330,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         ],
     hookNeeded: "4 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323215/Pattern%20photos/Stitch_cyes9q.png",
-    stitches: [
+    image: "images/Amigurumi/Stitch.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",
@@ -184,7 +345,7 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Rolly Crochet",
-    creatorLink: "blog.pianetadonna.it/rollycrochet/"
+    creatorLink: <a href= "blog.pianetadonna.it/rollycrochet/">Rolly Crochet</a>
 },
 {
     title: "3D Skull ",
@@ -200,9 +361,9 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         "scissors"
         ],
     hookNeeded: "3 mm - US terms",
-    yarnType: "3 - Light Worsted/DK",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323185/Pattern%20photos/AMI-Skull_n2922l.png",
-    stitches: [
+    yarnType: "3 - Light worsted/DK",
+    image: ".images/Amigurumi/AMI-Skull.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",
@@ -216,7 +377,7 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Million Bells",
-    creatorLink:  "http://www.etsy.com/shop/millionbells"
+    creatorLink: <a href= "http://www.etsy.com/shop/millionbells">Million Bells</a>
 },
 {
     title: "Willendorf Venus ",
@@ -230,9 +391,9 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         "scissors"
         ],
     hookNeeded: "2.25mm - US terms",
-    yarnType: "1 - fingering",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676323185/Pattern%20photos/venus-willendorf_ldjcd5.png",
-    stitches: [
+    yarnType: "1 - super fine/fingering",
+    image: ".images/Amigurumi/venus-willendorf.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",
@@ -243,10 +404,15 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Trishagurumi",
-    creatorLink: ""
+    creatorLink: <a href= "">Trishagurumi</a>
 
-},
-{
+})
+];
+
+let clothingArr = [
+
+
+Clothing ({
 
     title: "Broomstick Cowl ",
     level: "Advanced",
@@ -259,15 +425,15 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         "25 mm knitting needle or pin"
          ],
     hookNeeded: "3.5 mm, 4 mm - US terms",
-    yarnType: "3 - Light Worsted/DK",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392367/Pattern%20photos%20-%20clothing/Broomstick-cowl_scnykh.png",
-    stitches: [
+    yarnType: "3 - Light Worsted/DK ",
+    image: ".images/Clothing/Broomstick-cowl.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
                 
     ],
     creator: "Mon Petit Violon Designs",
-    creatorLink: "http://www.monpetitviolon.com/"
+    creatorLink: <a href= "http://www.monpetitviolon.com/">Mon Petit Violon Designs</a>
 },
 {
     title: "Starry Night Sweater ",
@@ -286,8 +452,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         ],
     hookNeeded: "5.5 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392368/Pattern%20photos%20-%20clothing/Starry-Night-sweater_ugysfl.png",
-    stitches: [
+    image: "./images/Clothing/Starry-Night-sweater.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",
@@ -302,7 +468,7 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Kayla Genato",
-    creatorLink: "http://www.instagram.com/craftsbygelato"
+    creatorLink: <a href= "http://www.instagram.com/craftsbygelato">Kayla Genato</a>
 },
 {
     title: "Checkered Cowl ",
@@ -315,8 +481,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         ],
     hookNeeded: "6.5 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392368/Pattern%20photos%20-%20clothing/Checkered-cowl_cshwlb.png",
-    stitches: [
+    image: "./images/Clothing/Checkered-cowl.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",
@@ -326,7 +492,7 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Yarnspirations - Designed by Heather Lodinsky",
-    creatorLink: "http://www.yarnspirations.com"
+    creatorLink: <a href= "http://www.yarnspirations.com">Yarnspirations</a>
 },
 {
     title: "Single Strap Sweater Dress ",
@@ -340,8 +506,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         ],
     hookNeeded: "5 mm, 7 mm - US terms",
     yarnType: "4 - Worsted/Aran",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392367/Pattern%20photos%20-%20clothing/single-strap-sweater-dress_gtupcr.png",
-    stitches: [
+    image: "./images/Clothing/single-strap-sweater-dress.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",
@@ -351,11 +517,11 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "TCDDIY",
-    creatorLink: "https://youtu.be/ScUJ3Aay_L8"
+    creatorLink: <a href= "https://youtu.be/ScUJ3Aay_L8">TCDDIY</a>
 },
 {
     title: "Curvy Pull Over ",
-    level: "Hopeful Beginner",
+    level: "hopeful beginner",
     type: "Clothing",
     itemsNeeded: [
         "Yarn amount varies",
@@ -365,8 +531,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         ],
     hookNeeded: "9 mm - US terms",
     yarnType: "6 - Super Bulky",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392367/Pattern%20photos%20-%20clothing/Curvy-pull-over_sy5fy8.png",
-    stitches: [
+    image: "./images/Clothing/Curvy-pull-over.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",
@@ -377,11 +543,11 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Yarnspirations",
-    creatorLink:  "https://www.yarnspirations.com"
+    creatorLink: <a href= "https://www.yarnspirations.com">Yarnspirations</a>
 },
 {
     title: "Hazy Unicorn Shawl ",
-    level: "Hopeful Beginner",
+    level: "hopeful beginner",
     type: "Clothing",
     itemsNeeded: [
         "6 skeins of yarn",
@@ -391,18 +557,18 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         ],
     hookNeeded: "7 mm - US terms",
     yarnType: "6 - Super Bulky",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392367/Pattern%20photos%20-%20clothing/hazy-unicorn-shawl_w2dk2g.png",
-    stitches: [
+    image: "./images/Clothing/Curvy-pull-over.png",
+    Stitches: [
         "CH - Chain",
         "SC - single crochet",
         "DEC - single crochet decrease",        
     ],
     creator: "Hobbi",
-    creatorLink:"http://shop.hobbii.com/hazy-unicorn-shawl"
+    creatorLink: <a href= "http://shop.hobbii.com/hazy-unicorn-shawl">Hobbi</a>
 },
 {
     title: "Madison Shoulder Wrap ",
-    level: "Intermediate",
+    level: "intermediate",
     type: "Clothing",
     itemsNeeded: [
         "1300-1500 yards of yarn A",
@@ -412,9 +578,9 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         "tape measure",
         ],
     hookNeeded: "3mm, 4mm, 5mm - US terms",
-    yarnType: "3 - Light Worsted/DK",
+    yarnType: "3 - Light Worsted/DK for yarn A, 4 - Worsted/Aran",
     image: "./images/Clothing/Madison-shoulder-wrap.png",
-    stitches: [
+    Stitches: [
         "CH - Chain",
         "CH SP - chain space",
         "SC - single crochet",
@@ -429,11 +595,11 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
                 
     ],
     creator: "Christel Riley Watts",
-    creatorLink: ''
+    creatorLink: <a href= "">Christel Riley Watts</a>
 },
 {
     title: "Skull Cocoon Sweater ",
-    level: "Intermediate",
+    level: "intermediate",
     type: "Clothing",
     itemsNeeded: [
         "4 skeins of yarn",
@@ -442,9 +608,9 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         "tape measure",
         ],
     hookNeeded: "6mm - US terms",
-    yarnType: "5 - Bulky",
-    image: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392368/Pattern%20photos%20-%20clothing/skull-cocoon-sweater_xboozf.png",
-    stitches: [
+    yarnType: "5 - Chunky",
+    image: "./images/Clothing/skull-cocoon-sweater.png",
+    Stitches: [
         "CH - Chain",
         "SL ST - slip stitch",
         "CH SP - chain space",
@@ -456,14 +622,11 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
                 
     ],
     creator: "Caryns Creations",
-    creatorLink: ''
-}
+    creatorLink: <a href= "">Caryns Creations</a>
+})
 ]
 
-const seedDB = async () => {
-    await Pattern.insertMany(allPatterns);
-    
-};
-seedDB().then(() =>{
-    mongoose.connection.close();
-});
+
+
+
+module.exports = router;

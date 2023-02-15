@@ -5,10 +5,16 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
 const members = require('../models/Members.model')
-const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js'); // calling in middleware
+const { isLoggedIn, isLoggedOut, isOwner, isNotOwner} = require('../middleware/route-guard') // calling in middleware
 const upload = require('./');
-const uploadImg = require('../config-cloudinary/cloudinary.config');
+const fileUploader = require('../config-cloudinary/cloudinary.config');
+const NewAmigurumi = require('../models/Pattern.model');
+const NewClothing = require ('../models/Clothing.model');
+const mongoose = require ('mongoose');
+const CreatePost = require('../models/CreatePost.model');
 
+
+// SIGN UP ROUTES 
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
 })
@@ -53,12 +59,14 @@ router.post('/signup', isLoggedOut,(req,res, next ) => {
         }
           });
     });
-// Login 
+
+
+// LOGIN IN ROUTES
 router.get('/login', (req, res, next) => {
   res.render('auth/login.hbs')
 });
 
-//verification of user credentials
+//VERIFICATION OF USER CREDENTIALS
 router.post('/login', (req, res, next) => {
   const { username, password } = req.body;
  
@@ -76,7 +84,7 @@ router.post('/login', (req, res, next) => {
         return;
       } else if (bcryptjs.compareSync(password, user.password)) {
         req.session.user = user
-        res.redirect('/members/member-profile');
+        res.render('/members/member-profile');
       } else {
         res.render('auth/login', { errorMessage: 'Incorrect password.' });
       }
@@ -84,54 +92,82 @@ router.post('/login', (req, res, next) => {
     .catch(error => next(error));
 });
 
-router.get('/member-profile', isLoggedIn, (req, res, next) => {
-const user = req.session.user
-console.log("this is the user", user)
-res.render('members/member-profile.hbs', user)
-});
 
-router.post('/member-profile', isLoggedIn, uploadImg.single("photo"), async(req, res, next) => {
-    console.log({...req.body}, "praying")
-   const { name, description, media } = req.body
-    console.log(req.file.path)
-//    upload.create({
-//     // name,
-//     // description,
-//     // media,
-//     // owner: req.session.user._id
-})
-// .then((createduploadImg) => {
-//     console.log(createduploadImg)
-//     res.redirect('/members/member-profile')
-// })
-// .catch((err) => {
-//     console.log(err)
-// })
-
-
+router.get('/profile', isLoggedIn, (req, res, next) => {
+    const user = req.session.user
+    console.log('SESSION =====> ', req.session);
+    res.render('members/member-profile.hbs', {user})
+    });
     
-// })
 
+                
+// MEMBER PROFILE ROUTES
+router.get('/member-profile', isLoggedIn, (req, res, next) => {
+const members = req.session.user
+        CreatePost.find({owner: req.session.user._id})
+.then((foundPost) => {
+    console.log(foundPost, "found the post")
+    // console.log(createduploadImg)
+    res.render('members/member-profile.hbs', {foundPost})
+})
+// console.log("this is the user", user)
+// res.render('members/member-profile.hbs', user)
+});
+// Member upload routes 
+router.post('/member-profile', isLoggedIn, fileUploader.single('imageUrl'), (req, res, next) => {
+    console.log({...req.body}, "praying")
+   const { name, description, } = req.body
+     
+   return CreatePost.create({
+    name,
+    description,
+    owner: req.session.user._id,
+    imageUrl: req.file.path
+})
+    .then((createduploadImg) => {
+        res.redirect('/members/member-profile')
+        // return CreatePost.find({owner: req.session.user._id})
+        // .then((FoundPost) => {
+        //     console.log(FoundPost,"found post")
+        //     console.log(createduploadImg)
+        //     res.render('members/member-profile.hbs')
+        // })
+    })
+    .catch((err) => {
+    console.log(err)
+    })    
+})
+
+//DELETE POST ON MEMBER PROFILE
+router.get('/delete-resource/:id', isOwner, deleteResource);
+function deleteResource(req, res, next){
+    Resource.findByIdAndDelete(req.params.id)
+    .then((confirmation) => {
+        console.log(confirmation)
+        res.redirect('/members/member-profile')
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
+//LOG OUT ROUTES
 router.get('/logout', isLoggedIn,(req, res, next) => {
 req.session.destroy(err => {
 if (err) next(err);
 res.redirect('/');
 });
 
-// //main
-// router.get('/main', isLoggedIn, (req, res, next) => {
-//   console.log('trying to get back to main',req.body)
-//   res.render ('users/main.hbs')
-// });
-
-// //private
-// router.get('/private',isLoggedIn,(req, res, next) => {
-//   res.render('users/private.hbs')
-// });
 
 });
 
-// when using redirect that's when you add the / in front. When sending to a page no / 
+
+//**To display a pdf file it will have to be modified
+// {/* <object data="/pdf/file1.pdf" type="img" width="100%" height="100%">
+//   <iframe src="/pdf/file1.pdf" width="100%" height="100%" style="border: none;">
+//    It looks like the browser you are using does not support PDFs. However, you can still download my resume to view it: <a href="/pdf/file1.pdf">Download PDF</a>
+//   </iframe>
+// </object>  */}
 
 
 module.exports = router;

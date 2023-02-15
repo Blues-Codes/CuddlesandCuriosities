@@ -1,9 +1,10 @@
 const { Schema, model } = require('mongoose');
 
-const CreatePostSchema = new Schema({
+const createPostSchema = new Schema({
     name: {type: String, maxlength: 100},
-    user: { type: Schema.Types.ObjectId, ref: "User" },
     description: { type: String, maxlength: 300 },
+    owner: {type: Schema.Types.ObjectId, ref: "Members" },
+    imageUrl: {type: String},
   });
 
-module.exports = model('create', createpostschema); 
+module.exports = model('CreatePost', createPostSchema); 

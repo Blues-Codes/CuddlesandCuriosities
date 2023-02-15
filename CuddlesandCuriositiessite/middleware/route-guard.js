@@ -17,8 +17,42 @@ const isLoggedIn = (req, res, next) => {
     }
     next();
   };
-  
+
+  const isOwner = (req, res, next) => {
+
+    Resource.findById(req.params.id)
+    .populate('owner')
+    .then((foundResource) => {
+        if (!req.session.user || foundResource.creator._id.toString() !== req.session.user._id) {
+            res.render('index.hbs', {errorMessage: "You are not authorized."})
+        } else {
+            next()
+        }
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
+}
+const isNotOwner = (req, res, next) => {
+
+    Resource.findById(req.params.id)
+    .populate('owner')
+    .then((foundResource) => {
+        if (!req.session.user || foundResource.creator._id.toString() === req.session.user._id) {
+            res.render('index.hbs')
+        } else {
+            next()
+        }
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
+}
   module.exports = {
     isLoggedIn,
-    isLoggedOut
+    isLoggedOut,
+    isOwner,
+    isNotOwner
   };

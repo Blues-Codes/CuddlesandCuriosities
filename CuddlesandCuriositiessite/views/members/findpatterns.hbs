@@ -1,11 +1,6 @@
-<h2>Add New clothing</h2>
-
-<form action="/Clothing/create-Clothing" method="post" enctype="multipart/form-data">
-
-<label for="">Title</label>
-<input type="text" name="Title">
-
-<label for="">level</label>
+<h2>Find Patterns</h2>
+<form action="/members/findpatterns" method="post">
+   <label for="">level</label>
    <select name="level" id="level">
         <option value="">Select level</option>
         <option value="Absolute Beginner">Absolute Beginner</option>
@@ -14,13 +9,7 @@
         <option value="Advanced">Advanced</option>
     </select>
 
-<label for="">Items needed</label>
-<input type="text" name="itemsneeded">
-
-<label for="">Hook needed</label>
-<input type="text" name="hookneeded">
-
-<label for="">Yarn Type</label>
+    <label for="">Yarn Type</label>
 <select name="yarn" id="yarn">
         <option value="">Select Subject</option>
         <option value="0 -Lace">0 -Lace</option>
@@ -33,20 +22,10 @@
         <option value="7 - Jumbo">7 - Jumbo</option>
     </select>
 
-<label for="">Image</label>
-<input type="text" name="imageUrl">
-
-<label for="">Stitches</label>
-<input type="text" name="Stitches">
-
-<label for="">creator</label>
-<input type="text" name="creator">
-
-<label for="">creator link</label>
-<input type="text" name="link">
-
-<button type="submit">Add Clothing</button>
-
+    <label for="">Type</label>
+       <select name="type" id="type">
+        <option value="">Craft type</option>
+        <option value="Amigurumi">Amigurumi</option>
+        <option value="Clothing">Clothing</option>
+    <button type="submit">Search</button>
 </form>
-
-

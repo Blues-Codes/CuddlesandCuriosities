@@ -9,5 +9,54 @@ a {
 
 
 img {
-  height: 35vh;
+  height: 45vh;
+}
+
+  
+ul {
+  border-bottom: 2px solid #7d3de4;
+  height: 30px;
+  padding: 1em 0;
+  list-style-type: none;
+}
+ 
+ul li {
+  line-height: 20px;
+}
+ 
+#to-right {
+  padding: 1em;
+  float: right;
+}
+ 
+#to-right span {
+  color: #8b2fe1;
+  font-size: 1.5em;
+}
+ 
+#form h2 {
+  display: flex;
+  justify-content: center;
+}
+ 
+#to-left {
+  float: left;
+}
+ 
+#to-left p a {
+  color: #000;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  border: #7d3de4;
+  border-width: 2px;
+}
+
+.caption {
+  display: flex;
+  
 }
