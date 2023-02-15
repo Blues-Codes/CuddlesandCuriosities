@@ -8,8 +8,7 @@ const members = require('../models/Members.model')
 const { isLoggedIn, isLoggedOut, isOwner, isNotOwner} = require('../middleware/route-guard') // calling in middleware
 const upload = require('./');
 const fileUploader = require('../config-cloudinary/cloudinary.config');
-const NewAmigurumi = require('../models/Pattern.model');
-const NewClothing = require ('../models/Clothing.model');
+const Pattern = require('../models/Pattern.model');
 const mongoose = require ('mongoose');
 const CreatePost = require('../models/CreatePost.model');
 
@@ -19,7 +18,7 @@ router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
 })
 
-router.post('/signup', isLoggedOut,(req,res, next ) => { 
+router.post('/signup',(req,res, next ) => { 
   console.log('The form data: ', req.body);
 
   const { username, email, password } = req.body;
@@ -83,8 +82,9 @@ router.post('/login', (req, res, next) => {
         res.render('auth/login', { errorMessage: 'Username is not registered. Try with other email.' });
         return;
       } else if (bcryptjs.compareSync(password, user.password)) {
+        console.log("we're here")
         req.session.user = user
-        res.render('/members/member-profile');
+        res.render('members/member-profile.hbs', {user});
       } else {
         res.render('auth/login', { errorMessage: 'Incorrect password.' });
       }
@@ -93,22 +93,22 @@ router.post('/login', (req, res, next) => {
 });
 
 
-router.get('/profile', isLoggedIn, (req, res, next) => {
-    const user = req.session.user
-    console.log('SESSION =====> ', req.session);
-    res.render('members/member-profile.hbs', {user})
-    });
+// router.get('/member-profile', isLoggedIn, (req, res, next) => {
+//     const user = req.session.user
+//     console.log('SESSION =====> ', req.session);
+//     res.render('members/member-profile.hbs', {user})
+//     });
     
 
                 
 // MEMBER PROFILE ROUTES
 router.get('/member-profile', isLoggedIn, (req, res, next) => {
-const members = req.session.user
+const user = req.session.user
         CreatePost.find({owner: req.session.user._id})
 .then((foundPost) => {
     console.log(foundPost, "found the post")
     // console.log(createduploadImg)
-    res.render('members/member-profile.hbs', {foundPost})
+    res.render('members/member-profile.hbs', {foundPost, user})
 })
 // console.log("this is the user", user)
 // res.render('members/member-profile.hbs', user)
@@ -139,17 +139,14 @@ router.post('/member-profile', isLoggedIn, fileUploader.single('imageUrl'), (req
 })
 
 //DELETE POST ON MEMBER PROFILE
-router.get('/delete-resource/:id', isOwner, deleteResource);
-function deleteResource(req, res, next){
-    Resource.findByIdAndDelete(req.params.id)
-    .then((confirmation) => {
-        console.log(confirmation)
+router.post('/deletepost/:id', isOwner,(req,res, next) => {
+    return CreatePost.deleteOne({_id:req.params.id}) .then(()=>{
         res.redirect('/members/member-profile')
     })
     .catch((err) => {
-        console.log(err)
+    console.log(err)
     })
-}
+})
 
 //LOG OUT ROUTES
 router.get('/logout', isLoggedIn,(req, res, next) => {

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 const { isLoggedIn } = require('../middleware/route-guard');
-const Clothing = require('../models/Clothing.model');
+const Pattern = require('../models/Pattern.model');
 
 router.get('/clothing', (req, res, next) => {
   

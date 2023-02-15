@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 const { isLoggedIn } = require('../middleware/route-guard');
-const Amigurumi = require('../models/Pattern.model');
+const Pattern = require('../models/Pattern.model');
 
 router.get('/amigurumi', (req, res, next) => {
   

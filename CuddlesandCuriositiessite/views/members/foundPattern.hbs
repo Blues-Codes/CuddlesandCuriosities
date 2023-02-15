@@ -1,0 +1,23 @@
+<h2>Search Results</h2>
+{{#each foundPattern}}
+
+
+    <h2>{{title}}</h2>
+    
+    <p>Level: {{level}}</p>
+    <p>Type: {{type}}</p>
+    <p>Yarn Type: {{yarnType}}</p>
+     <a href="/members/patterndetails/{{_id}}">See details</a>
+
+{{/each}}
+
+ {{!-- title,
+    level, 
+    type,
+    itemsNeeded,
+    hookNeeded,
+    yarnType,
+    imageUrl: req.file.path,
+    stitches,
+    creator: req.session.user._id,
+    creatorLink, --}}

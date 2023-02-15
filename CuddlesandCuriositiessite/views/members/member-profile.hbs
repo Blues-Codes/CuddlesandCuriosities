@@ -1,21 +1,5 @@
-{{!-- member profile page --}}
+{{#if user}}
 <h1>Hi {{username}}!</h1>
-
-
-{{!-- <div id ="member-location">
- <h2> Where I'm from </h2>
- <label> Location
-      <input type="text" name="comment" placeholder="city/state" />
-    </label>
-</div> --}}
-
-{{!-- <div id ="Current-WIP">
-    <h2>What I'm working on ("Work in Progress")</h2>
-    <label> WIP
-      <input type="text" name="comment" placeholder="my current project" />
-    </label>
-    <a href="submit">Submit</a>
-</div> --}}
 
 <div id="finished-products">
     <h2>Show off</h2>
@@ -38,10 +22,17 @@
    <p> {{name}} </p>
     <p> {{description}} </p>
     <img src="{{imageUrl}}"/>
-
+<form action="/members/deletepost/{{_id}}" method ="POST">
+<button type="submit">DELETE</button>
+</form>
 {{/each}}
 </div>
-<button class="other-buttons">
+{{!-- <button class="other-buttons">
     <a href="/members/member-profile">Refresh</a>
-  </button>
-<button type="delete">DELETE</button>
+  </button> --}}
+
+
+{{else}}
+<p>You're not a registered user.</p>
+{{/if}}
+

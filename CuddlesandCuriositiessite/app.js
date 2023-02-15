@@ -18,7 +18,7 @@ const hbs = require('hbs')
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 var membersRouter = require('./routes/members');
-var amigurumiRouter = require('./routes/amigurumi');
+var amigurumiRouter = require('./routes/addpattern');
 var clothingRouter = require('./routes/clothing');
  
 var app = express();

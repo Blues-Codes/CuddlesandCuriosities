@@ -1,4 +1,7 @@
 // middleware/route-guard.js
+const mongoose = require('mongoose')
+const CreatePost = require("../models/CreatePost.model.js");
+const Members = require('../models/Members.model.js')
 
 // checks if the user is logged in when trying to access a specific page
 const isLoggedIn = (req, res, next) => {
@@ -19,11 +22,12 @@ const isLoggedIn = (req, res, next) => {
   };
 
   const isOwner = (req, res, next) => {
-
-    Resource.findById(req.params.id)
-    .populate('owner')
-    .then((foundResource) => {
-        if (!req.session.user || foundResource.creator._id.toString() !== req.session.user._id) {
+    console.log(req.params.id)
+    return CreatePost.findById(req.params.id)
+    // .populate('owner')
+    .then((foundCreatePost) => {
+        console.log(foundCreatePost)
+        if (!req.session.user || foundCreatePost.owner._id.toString() !== req.session.user._id) {
             res.render('index.hbs', {errorMessage: "You are not authorized."})
         } else {
             next()
@@ -34,25 +38,24 @@ const isLoggedIn = (req, res, next) => {
     })
 
 }
-const isNotOwner = (req, res, next) => {
+// const isNotOwner = (req, res, next) => {
 
-    Resource.findById(req.params.id)
-    .populate('owner')
-    .then((foundResource) => {
-        if (!req.session.user || foundResource.creator._id.toString() === req.session.user._id) {
-            res.render('index.hbs')
-        } else {
-            next()
-        }
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+//     Post.findById(req.params.id)
+//     .populate('owner')
+//     .then((foundResource) => {
+//         if (!req.session.user || foundResource.creator._id.toString() === req.session.user._id) {
+//             res.render('index.hbs')
+//         } else {
+//             next()
+//         }
+//     })
+//     .catch((err) => {
+//         console.log(err)
+//     })
 
-}
+
   module.exports = {
     isLoggedIn,
     isLoggedOut,
-    isOwner,
-    isNotOwner
+    isOwner
   };

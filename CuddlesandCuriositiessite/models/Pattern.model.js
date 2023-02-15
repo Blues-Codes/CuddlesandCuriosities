@@ -15,6 +15,7 @@ const patternSchema = new Schema({
     stitches: { type: [ String ]},
     creator: { type: String, required:true },
     creatorLink: { type: String },
+    patternLink: { type: String },
   
 });
 const Pattern = mongoose.model('Pattern', patternSchema);

@@ -1,3 +1,4 @@
+require ('dotenv').config()
 const mongoose = require('mongoose');
 const Pattern = require('./models/Pattern.model');
 
@@ -30,7 +31,8 @@ stitches: [
     "FO - Fasten off",
 ],
 creator: "Nichole's Nerdy Knots",
-creatorLink:   "www.facebook.com/nicholesnerdyknots" 
+creatorLink:   "www.facebook.com/nicholesnerdyknots", 
+patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392636/Patterns-Ami/Toothless_wbtm91.pdf"
 },
 {
 title: "Squirt",
@@ -61,7 +63,8 @@ stitches: [
     "FO - Fasten off",
 ],
 creator: "Cuddles and Curiosities",
-creatorLink: ''
+creatorLink: '',
+patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392635/Patterns-Ami/Squirt_eoryun.pdf"
 },
 {
 title: "Baby Sully",
@@ -92,7 +95,8 @@ stitches: [
     
 ],
 creator: "A Morning Cup of Jo Creations",
-creatorLink: "https://www.facebook.com/amorningcupofjocreations"
+creatorLink: "https://www.facebook.com/amorningcupofjocreations",
+patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392635/Patterns-Ami/Baby_mike_and_sully_bkg828.pdf"
 },
 {
 title: "Baby Mike",
@@ -120,7 +124,8 @@ stitches: [
     
 ],
 creator: "A Morning Cup of Jo Creations",
-creatorLink:  "https://www.facebook.com/amorningcupofjocreations"
+creatorLink:  "https://www.facebook.com/amorningcupofjocreations",
+patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392635/Patterns-Ami/Baby_mike_and_sully_bkg828.pdf"
 
 },
 {
@@ -155,7 +160,8 @@ stitches: [
     
 ],
 creator: "GATO FU",
-creatorLink: "http://www.etsy.com/shop/gatofu"
+creatorLink: "http://www.etsy.com/shop/gatofu",
+patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392636/Patterns-Ami/Baphomet_English_m0f46y.pdf"
 },
 {
     title: "Stitch",
@@ -184,7 +190,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Rolly Crochet",
-    creatorLink: "blog.pianetadonna.it/rollycrochet/"
+    creatorLink: "blog.pianetadonna.it/rollycrochet/",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676487927/Patterns-Ami/_Disney__Stitch_Eng_ve8lv0.pdf"
 },
 {
     title: "3D Skull ",
@@ -216,7 +223,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Million Bells",
-    creatorLink:  "http://www.etsy.com/shop/millionbells"
+    creatorLink:  "http://www.etsy.com/shop/millionbells",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392636/Patterns-Ami/AmigurumiCrochetPatternCreepySkull_aiognh.pdf"
 },
 {
     title: "Willendorf Venus ",
@@ -243,7 +251,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Trishagurumi",
-    creatorLink: ""
+    creatorLink: "",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392636/Patterns-Ami/Willendorf_Venus_pattern_update_bmmn8l.pdf"
 
 },
 {
@@ -267,7 +276,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
                 
     ],
     creator: "Mon Petit Violon Designs",
-    creatorLink: "http://www.monpetitviolon.com/"
+    creatorLink: "http://www.monpetitviolon.com/",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392748/patterns-clothing/broomstick-lace-cowl_q65szl.pdf"
 },
 {
     title: "Starry Night Sweater ",
@@ -302,7 +312,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Kayla Genato",
-    creatorLink: "http://www.instagram.com/craftsbygelato"
+    creatorLink: "http://www.instagram.com/craftsbygelato",
+    patternlink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392747/patterns-clothing/TheStarryNightSweaterPattern_jgvjcs.pdf"
 },
 {
     title: "Checkered Cowl ",
@@ -326,7 +337,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Yarnspirations - Designed by Heather Lodinsky",
-    creatorLink: "http://www.yarnspirations.com"
+    creatorLink: "http://www.yarnspirations.com",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392747/patterns-clothing/Checkered_Cowl_eefyqj.pdf"
 },
 {
     title: "Single Strap Sweater Dress ",
@@ -351,7 +363,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "TCDDIY",
-    creatorLink: "https://youtu.be/ScUJ3Aay_L8"
+    creatorLink: "https://youtu.be/ScUJ3Aay_L8",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392748/patterns-clothing/CrochetSingleStrapSweaterDressw.Photos-1_rhwerb.pdf"
 },
 {
     title: "Curvy Pull Over ",
@@ -377,7 +390,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         
     ],
     creator: "Yarnspirations",
-    creatorLink:  "https://www.yarnspirations.com"
+    creatorLink:  "https://www.yarnspirations.com",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676488146/patterns-clothing/Crochet_Cowl_pullover_hfbijo.pdf"
 },
 {
     title: "Hazy Unicorn Shawl ",
@@ -398,7 +412,8 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
         "DEC - single crochet decrease",        
     ],
     creator: "Hobbi",
-    creatorLink:"http://shop.hobbii.com/hazy-unicorn-shawl"
+    creatorLink:"http://shop.hobbii.com/hazy-unicorn-shawl",
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392748/patterns-clothing/Hazy_Unicorn_Shawl_fdqx9g.pdf"
 },
 {
     title: "Madison Shoulder Wrap ",
@@ -456,14 +471,37 @@ creatorLink: "http://www.etsy.com/shop/gatofu"
                 
     ],
     creator: "Caryns Creations",
-    creatorLink: ''
+    creatorLink: '',
+    patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392747/patterns-clothing/Skull_Cocoon_Sweater_syntkf.pdf"
 }
 ]
 
-const seedDB = async () => {
-    await Pattern.insertMany(allPatterns);
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(x => {
+    console.log(`Connected to the database: "${x.connection.name}"`);
+    // Before adding any recipes to the database, let's remove all existing ones
+    return Pattern.deleteMany()
+  })
+
+  .then(() => {
+    return Pattern.insertMany(allPatterns)
+
+  })
+  .then((createdPatterns) => {
+    console.log(createdPatterns.length)
+    mongoose.connection.close(() => {
+      console.log('Mongoose connection closed');
+    });
+  })
+  .catch(error => {
+    console.error('Error connecting to the database', error);
+  });
+
+// const seedDB = async () => {
+//     await Pattern.insertMany(allPatterns);
     
-};
-seedDB().then(() =>{
-    mongoose.connection.close();
-});
+// };
+// seedDB().then(() =>{
+//     mongoose.connection.close();
+// });
