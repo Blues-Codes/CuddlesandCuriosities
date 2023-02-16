@@ -18,8 +18,7 @@ const hbs = require('hbs')
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 var membersRouter = require('./routes/members');
-var amigurumiRouter = require('./routes/addpattern');
-var clothingRouter = require('./routes/clothing');
+
  
 var app = express();
 
@@ -82,8 +81,7 @@ app.post('/upload', upload.array('photos', 3), function(req, res, next) {
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/members', membersRouter);
-app.use('/amigurumi', amigurumiRouter);
-app.use('/clothing', clothingRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

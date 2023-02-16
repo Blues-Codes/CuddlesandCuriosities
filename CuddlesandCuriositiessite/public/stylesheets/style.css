@@ -2,15 +2,37 @@ body {
   padding: 50px;
   font-family: 'Explora', cursive;
   font-family: 'Kaushan Script', cursive;
-  background-color:antiquewhite;
+  background-color: #f9f5f2;
 }
-/* a {
-  color: #00B7FF;
-} */
+a {
+  color: #04a7e7;
+}
 
+h1 {
+
+  display: flex;
+  align-items: center;
+}
+video {
+  height: 30vh;
+  border: none;
+
+}
+
+.logo {
+  border: none;
+  height:20vh;
+  }
+
+
+#free-Resources {
+  display: flex;
+  justify-content: space-around;
+  
+}
 
 img {
-  height: 45vh;
+  height: 30vh;
   border: 2px solid #7d3de4;
 
 }
@@ -68,4 +90,12 @@ div {
   display: flex;
   text-align: bottom;
   
+}
+
+#showoff-grid {
+  grid-area: 1/2/4/6;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  border: none; */
 }

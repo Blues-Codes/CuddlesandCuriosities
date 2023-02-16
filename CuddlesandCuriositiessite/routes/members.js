@@ -5,7 +5,7 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
 const members = require('../models/Members.model')
-const { isLoggedIn, isLoggedOut, isOwner, isNotOwner} = require('../middleware/route-guard') // calling in middleware
+const {isLoggedIn, isLoggedOut, isOwner} = require('../middleware/route-guard') // calling in middleware
 const upload = require('./');
 const fileUploader = require('../config-cloudinary/cloudinary.config');
 const Pattern = require('../models/Pattern.model');
@@ -92,12 +92,46 @@ router.post('/login', (req, res, next) => {
     .catch(error => next(error));
 });
 
+//CREATE PATTERN ROUTES
+router.get('/createpattern',(req, res, next) => {
+    res.render('members/createpattern.hbs');
+  });
+  
+  router.post('/createpattern',(req, res, next) => {
+  
+      const { name, type, imageUrl, yarnType, creator, itemsNeeded, } = req.body
+  
+      Pattern.create({
+          name,
+          type,
+          creator: req.session.user._id,
+          yarnType,
+          stitches,
+          itemsNeeded,
+          imageUrl: req.file.path
+      })
+      .then((createdPattern) => {
+          console.log(createdPattern)
+          res.redirect('/members/allpatterns')
+      })
+      .catch((err) => {
+          console.log(err)
+      })
+  
+  });
 
-// router.get('/member-profile', isLoggedIn, (req, res, next) => {
-//     const user = req.session.user
-//     console.log('SESSION =====> ', req.session);
-//     res.render('members/member-profile.hbs', {user})
-//     });
+
+  router.get('/findpatterns/:id', (req, res, next) => {
+
+    Pattern.findById(req.params.id)
+     .then((foundPattern) => {
+        res.render('members/patterndetails.hbs', foundPattern)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
+})
     
 
                 
@@ -107,12 +141,11 @@ const user = req.session.user
         CreatePost.find({owner: req.session.user._id})
 .then((foundPost) => {
     console.log(foundPost, "found the post")
-    // console.log(createduploadImg)
     res.render('members/member-profile.hbs', {foundPost, user})
 })
-// console.log("this is the user", user)
-// res.render('members/member-profile.hbs', user)
 });
+
+
 // Member upload routes 
 router.post('/member-profile', isLoggedIn, fileUploader.single('imageUrl'), (req, res, next) => {
     console.log({...req.body}, "praying")
@@ -154,9 +187,55 @@ req.session.destroy(err => {
 if (err) next(err);
 res.redirect('/');
 });
-
-
 });
+
+//FINDING PATTERNS ROUTES
+
+router.get('/findpatterns', (req, res, next) => {
+    res.render('members/findpatterns.hbs')
+});
+
+router.post("/findpatterns", (req, res, next) => {
+      
+    const { level, type, yarnType } = req.body;
+    if (level && type && yarnType) {
+      Pattern.find({
+        level,
+        type,
+        yarnType,
+      })
+        .then((foundPattern) => {
+          res.render("members/foundPattern.hbs", { foundPattern });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      let body = req.body
+      Object.keys(body).filter(key => !body[key]).forEach(key => delete body[key]);
+        
+      Pattern.find(body)
+        .then((foundPattern) => {
+          res.render("members/foundPattern.hbs", { foundPattern });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
+router.get('/allpatterns', (req, res, next) =>{
+    Pattern.find()
+    .then((patterns) =>{
+        res.render('members/allpatterns.hbs', {patterns})
+
+    })
+    .catch((err) =>{
+        console.log(err)
+    })
+});
+
+
+   
 
 
 //**To display a pdf file it will have to be modified

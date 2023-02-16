@@ -1,15 +1,25 @@
 <h2>All Patterns</h2>
 
-{{#each foundPatterns}}
+{{#each patterns}}
 
    <h2>{{name}}</h2>
     
     <p>Title: {{title}}</p>
     <p>Level: {{level}}</p>
     <p>Type: {{type}}</p>
-    <p>Yarn Type: {{yarn}}</p>
-    <p>Hook needed: {{hookneeded}}</p>
-    <p>Type: {{type}}</p>
-    <a href="/resources/findpatterns/{{_id}}">See details</a>
+    <p>Yarn Type: {{yarnType}}</p>
+    <p>Hook needed: {{hookNeeded}}</p>
+    <a href="/members/findpatterns/{{_id}}">See details</a>
+
+    <object data="{{imageUrl}}" type="img" width="100%" height="100%">
+  <iframe id="pdf" src="{{imageUrl}}" width="100%" height="100%" style="border: none;">
+   It looks like the browser you are using does not support PDFs.
+  </iframe>
+    </object> 
+
 
 {{/each}}
+
+<form action="/members/createpattern" method="POST">
+<button type="submit">Create</button>
+</form>

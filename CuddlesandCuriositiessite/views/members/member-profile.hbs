@@ -1,9 +1,9 @@
 {{#if user}}
 <h1>Hi {{username}}!</h1>
 
-<div id="finished-products">
     <h2>Show off</h2>
-    
+    <br>
+<div id="finished-products">
 <form action="/members/member-profile" method="POST" enctype="multipart/form-data">
 
 <label for="">Name</label>
@@ -17,7 +17,8 @@
 
 <button type="submit">SHOW OFF</button>
 </form>
-
+</div>
+<div class="showoff-grid">
 {{#each foundPost}}
    <p> {{name}} </p>
     <p> {{description}} </p>
@@ -27,9 +28,7 @@
 </form>
 {{/each}}
 </div>
-{{!-- <button class="other-buttons">
-    <a href="/members/member-profile">Refresh</a>
-  </button> --}}
+
 
 
 {{else}}

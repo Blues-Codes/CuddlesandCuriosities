@@ -25,7 +25,7 @@ const isLoggedIn = (req, res, next) => {
     console.log(req.params.id)
     return CreatePost.findById(req.params.id)
     // .populate('owner')
-    .then((foundCreatePost) => {
+        .then((foundCreatePost) => {
         console.log(foundCreatePost)
         if (!req.session.user || foundCreatePost.owner._id.toString() !== req.session.user._id) {
             res.render('index.hbs', {errorMessage: "You are not authorized."})
