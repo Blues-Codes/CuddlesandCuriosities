@@ -9,13 +9,14 @@
     <p>Type: {{type}}</p>
     <p>Yarn Type: {{yarnType}}</p>
     <p>Hook needed: {{hookNeeded}}</p>
+    <img class = "image-tag" src="{{image}}" alt="Pattern Image">
     <a href="/members/findpatterns/{{_id}}">See details</a>
 
-    <object data="{{imageUrl}}" type="img" width="100%" height="100%">
+    {{!-- <object data="{{imageUrl}}" type="img" width="100%" height="100%">
   <iframe id="pdf" src="{{imageUrl}}" width="100%" height="100%" style="border: none;">
    It looks like the browser you are using does not support PDFs.
   </iframe>
-    </object> 
+    </object>  --}}
 
 
 {{/each}}

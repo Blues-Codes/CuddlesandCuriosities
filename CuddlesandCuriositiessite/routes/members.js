@@ -224,6 +224,7 @@ router.post("/findpatterns", (req, res, next) => {
     }
   });
 router.get('/allpatterns', (req, res, next) =>{
+    console.log('here i am')
     Pattern.find()
     .then((patterns) =>{
         res.render('members/allpatterns.hbs', {patterns})

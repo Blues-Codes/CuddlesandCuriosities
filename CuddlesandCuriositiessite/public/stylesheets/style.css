@@ -8,6 +8,10 @@ a {
   color: #04a7e7;
 }
 
+.cloud-image {
+  height: 30vh;
+}
+
 h1 {
 
   display: flex;
