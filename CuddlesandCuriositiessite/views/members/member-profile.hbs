@@ -8,10 +8,10 @@
 
 <label for="">Name</label>
 <input type="text" name="name">
-
+<br>
 <label for="">Description</label>
 <input type="text" name="description">
-
+<br>
 <label for="">Media</label>
 <input type="file" name="imageUrl">
 
@@ -21,7 +21,9 @@
 <div class="showoff-grid">
 {{#each foundPost}}
    <p> {{name}} </p>
+   <br>
     <p> {{description}} </p>
+    <br>
     <img src="{{imageUrl}}"/>
 <form action="/members/deletepost/{{_id}}" method ="POST">
 <button type="submit">DELETE</button>

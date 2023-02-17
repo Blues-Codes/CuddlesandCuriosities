@@ -415,37 +415,37 @@ patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392636/Patt
     creatorLink:"http://shop.hobbii.com/hazy-unicorn-shawl",
     patternLink: "https://res.cloudinary.com/doenxkhcf/image/upload/v1676392748/patterns-clothing/Hazy_Unicorn_Shawl_fdqx9g.pdf"
 },
-{
-    title: "Madison Shoulder Wrap ",
-    level: "Intermediate",
-    type: "Clothing",
-    itemsNeeded: [
-        "1300-1500 yards of yarn A",
-        "1200 - 1400 yards of yarn B",
-        "Stitch markers",
-        "yarn needle",
-        "tape measure",
-        ],
-    hookNeeded: "3mm, 4mm, 5mm - US terms",
-    yarnType: "3 - Light Worsted/DK",
-    image: "./images/Clothing/Madison-shoulder-wrap.png",
-    stitches: [
-        "CH - Chain",
-        "CH SP - chain space",
-        "SC - single crochet",
-        "DC - double crochet",
-        "TR - triple crochet",
-        "HDC - half double crochet",
-        "HDC3L - half double croch in 3rd loop",
-        "TR2TOG - triple crochet decrease with 2 chair spaces",
-        "FPDC - front post double crochet",
-        "BBL - bobble stitch",
-        "FHDC - foundation half double crochet"
+// {
+//     title: "Madison Shoulder Wrap ",
+//     level: "Intermediate",
+//     type: "Clothing",
+//     itemsNeeded: [
+//         "1300-1500 yards of yarn A",
+//         "1200 - 1400 yards of yarn B",
+//         "Stitch markers",
+//         "yarn needle",
+//         "tape measure",
+//         ],
+//     hookNeeded: "3mm, 4mm, 5mm - US terms",
+//     yarnType: "3 - Light Worsted/DK",
+//     image: "./images/Clothing/Madison-shoulder-wrap.png",
+//     stitches: [
+//         "CH - Chain",
+//         "CH SP - chain space",
+//         "SC - single crochet",
+//         "DC - double crochet",
+//         "TR - triple crochet",
+//         "HDC - half double crochet",
+//         "HDC3L - half double croch in 3rd loop",
+//         "TR2TOG - triple crochet decrease with 2 chair spaces",
+//         "FPDC - front post double crochet",
+//         "BBL - bobble stitch",
+//         "FHDC - foundation half double crochet"
                 
-    ],
-    creator: "Christel Riley Watts",
-    creatorLink: ''
-},
+//     ],
+//     creator: "Christel Riley Watts",
+//     creatorLink: ''
+// },
 {
     title: "Skull Cocoon Sweater ",
     level: "Intermediate",

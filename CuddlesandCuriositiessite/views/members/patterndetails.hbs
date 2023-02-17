@@ -4,9 +4,15 @@
     <p>Level: {{level}}</p>
     <p>Type: {{type}}</p>
     <p>Yarn Type: {{yarnType}}</p>
-    <p>Pattern Link: {{patternLink}}</p>
+    <p>Pattern Link: "{{patternLink}}"</p>
 
 
-<a href="/members/editPattern/{{_id}}"><button>Edit</button></a>
-
-<a href="/members/deletePattern/{{_id}}"><button>Delete</button></a>
+<div class="pattern-image">
+    <object class ="cloud-img" data="{{imageUrl}}" width="100vw" height="100vh" type="img">
+    <iframe id="pdf" src="{{imageUrl}}" >
+    It looks like the browser you are using does not support PDFs.
+    </iframe>
+    </object>
+    <br>
+    </div>
+</div>
